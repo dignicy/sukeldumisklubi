@@ -1,6 +1,5 @@
 import { redirect } from '@sveltejs/kit';
 import type { LoginBody } from '../auth';
-import { PUBLIC_ORIGIN } from '$env/static/public';
 
 export const actions = {
 	async login({ locals, request, url }) {
@@ -10,9 +9,7 @@ export const actions = {
 		const getRefered = request.headers.get('referer');
 		const checkIfUrlHasRedirect = new URL(getRefered || '').searchParams.get('redirect');
 
-		console.log("Check if url has redirect", checkIfUrlHasRedirect);
 		try {
-			console.log("Logging in");
 			const user = await locals.pb.collection('users').authWithPassword(body.email, body.password);
 			if (!user.record.verified) {
 				locals.pb.authStore.clear();
