@@ -31,11 +31,13 @@
 				buttons: {
 					primary: {
 						text: "Tutvu koolitustega",
-						variant: "default"
+						variant: "default",
+						href: "/sukeldumiskursused-algajatele"
 					},
 					secondary: {
 						text: "Broneeri proovisukeldumine",
-						variant: "outline"
+						variant: "outline",
+						href: "/proovisukeldumine"
 					}
 				}
 			},
@@ -50,7 +52,7 @@
 					alt: "Kvaliteetne sukeldumisvarustus müük, rent ja hooldus"
 				},
 				description: [
-					"Meie varustusepoes leiad kõike vajalikku ohutuks ja mugavaks sukeldumiseks. Müüme ainult kvaliteetseid tooteid tunnustatud tootjatelt ja pakume ka varustuse renti neile, kes soovivad enne ostu proovida või vajjavad varustust ainult üksikuteks sukeldumisteks."
+					"Meie varustusepoes leiad kõike vajalikku ohutuks ja mugavaks sukeldumiseks. Müüme ainult kvaliteetseid tooteid tunnustatud tootjatelt ja pakume ka varustuse renti neile, kes soovivad enne ostu proovida või vajavad varustust ainult üksikuteks sukeldumisteks."
 				],
 				features: [
 					"Regulaatorid ja BCD",
@@ -61,11 +63,13 @@
 				buttons: {
 					primary: {
 						text: "Tutvu varustusega",
-						variant: "default"
+						variant: "default",
+						href: "/sukeldumisvarustuse-rent"
 					},
 					secondary: {
 						text: "Küsi hinnapakkumist",
-						variant: "outline"
+						variant: "outline",
+						href: "/kontakt"
 					}
 				}
 			},
@@ -91,11 +95,13 @@
 				buttons: {
 					primary: {
 						text: "Vaata üritustekalendrit",
-						variant: "default"
+						variant: "default",
+						href: "/uritused"
 					},
 					secondary: {
 						text: "Küsi reisiinfot",
-						variant: "outline"
+						variant: "outline",
+						href: "/kontakt"
 					}
 				}
 			}
@@ -155,12 +161,16 @@
 						</div>
 
 						<div class="flex flex-col gap-3 sm:flex-row">
-							<Button class="bg-orange-500 hover:bg-orange-600 text-white rounded-xl h-10 font-medium">
-								{service.buttons.primary.text}
-							</Button>
-							<Button variant="outline" class="border-2 hover:bg-gray-50 rounded-xl h-10 font-medium">
-								{service.buttons.secondary.text}
-							</Button>
+							<a href={service.buttons.primary.href}>
+								<Button class="bg-orange-500 hover:bg-orange-600 text-white rounded-xl h-10 font-medium w-full">
+									{service.buttons.primary.text}
+								</Button>
+							</a>
+							<a href={service.buttons.secondary.href}>
+								<Button variant="outline" class="border-2 hover:bg-gray-50 rounded-xl h-10 font-medium w-full">
+									{service.buttons.secondary.text}
+								</Button>
+							</a>
 						</div>
 					</div>
 				</div>

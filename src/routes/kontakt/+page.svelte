@@ -12,6 +12,11 @@
 		CardTitle
 	} from '$lib/components/ui/card';
 	import { Phone, Mail, MapPin, Clock, Calendar, MessageCircle } from 'lucide-svelte';
+	import { enhance } from '$app/forms';
+	import type { ActionData } from './$types';
+
+	// Form action result
+	export let form: ActionData;
 
 	// Page data configuration
 	const pageData = {
@@ -30,42 +35,7 @@
 	};
 
 	// Form state
-	let formData = {
-		name: '',
-		email: '',
-		phone: '',
-		subject: '',
-		message: ''
-	};
-
 	let isSubmitting = false;
-	let submitted = false;
-
-	// Handle form submission
-	async function handleSubmit(event: Event) {
-		event.preventDefault();
-		isSubmitting = true;
-
-		// Simulate form submission
-		await new Promise(resolve => setTimeout(resolve, 1000));
-		
-		submitted = true;
-		isSubmitting = false;
-		
-		// Reset form
-		formData = {
-			name: '',
-			email: '',
-			phone: '',
-			subject: '',
-			message: ''
-		};
-
-		// Reset success message after 5 seconds
-		setTimeout(() => {
-			submitted = false;
-		}, 5000);
-	}
 </script>
 
 <svelte:head>
@@ -131,7 +101,8 @@
 						</CardDescription>
 					</CardHeader>
 					<CardContent>
-						{#if submitted}
+						<!-- Success Message -->
+						{#if form?.success}
 							<div class="rounded-xl border border-green-200 bg-green-50 p-6 text-center">
 								<div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
 									<svg class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -139,16 +110,40 @@
 									</svg>
 								</div>
 								<h3 class="text-lg font-semibold text-green-900 mb-2">Sõnum saadetud!</h3>
-								<p class="text-green-700">Täname teid pöördumise eest. Vastame esimesel võimalusel.</p>
+								<p class="text-green-700">{form.message}</p>
 							</div>
 						{:else}
-							<form on:submit={handleSubmit} class="space-y-6">
+							<!-- Error Message -->
+							{#if form?.error}
+								<div class="rounded-xl border border-red-200 bg-red-50 p-4 mb-6">
+									<div class="flex">
+										<svg class="h-5 w-5 text-red-400 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+											<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+										</svg>
+										<div class="ml-3">
+											<p class="text-sm text-red-800">{form.error}</p>
+										</div>
+									</div>
+								</div>
+							{/if}
+
+							<form 
+								method="POST" 
+								use:enhance={() => {
+									isSubmitting = true;
+									return async ({ update }) => {
+										await update();
+										isSubmitting = false;
+									};
+								}}
+								class="space-y-6"
+							>
 								<div class="grid gap-4 md:grid-cols-2">
 									<div class="space-y-2">
 										<Label for="name" class="text-sm font-medium text-gray-900">Nimi *</Label>
 										<Input
 											id="name"
-											bind:value={formData.name}
+											name="name"
 											placeholder="Teie nimi"
 											required
 											class="h-12"
@@ -158,8 +153,8 @@
 										<Label for="email" class="text-sm font-medium text-gray-900">E-mail *</Label>
 										<Input
 											id="email"
+											name="email"
 											type="email"
-											bind:value={formData.email}
 											placeholder="teie@email.ee"
 											required
 											class="h-12"
@@ -172,8 +167,8 @@
 										<Label for="phone" class="text-sm font-medium text-gray-900">Telefon</Label>
 										<Input
 											id="phone"
+											name="phone"
 											type="tel"
-											bind:value={formData.phone}
 											placeholder="+372 5..."
 											class="h-12"
 										/>
@@ -182,7 +177,7 @@
 										<Label for="subject" class="text-sm font-medium text-gray-900">Teema *</Label>
 										<Input
 											id="subject"
-											bind:value={formData.subject}
+											name="subject"
 											placeholder="Sõnumi teema"
 											required
 											class="h-12"
@@ -194,7 +189,7 @@
 									<Label for="message" class="text-sm font-medium text-gray-900">Sõnum *</Label>
 									<Textarea
 										id="message"
-										bind:value={formData.message}
+										name="message"
 										placeholder="Kirjutage siia oma sõnum..."
 										required
 										rows={6}

@@ -36,7 +36,7 @@ function handleScroll() {
 
 <Hero />
 <Services />
-<Safaris safariEvents={data.safariEvents} />
+<Safaris />
 <Contact />
 
 

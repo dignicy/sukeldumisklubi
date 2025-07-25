@@ -53,8 +53,10 @@
 		"zod": "^3.24.4"
 	},
 	"dependencies": {
+		"@types/nodemailer": "^6.4.17",
 		"embla-carousel-svelte": "^8.6.0",
 		"lucide-svelte": "^0.508.0",
+		"nodemailer": "^7.0.5",
 		"pocketbase": "^0.26.0",
 		"svelte-exmarkdown": "^5.0.1"
 	}

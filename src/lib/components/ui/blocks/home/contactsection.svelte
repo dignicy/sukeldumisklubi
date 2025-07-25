@@ -4,7 +4,7 @@
 </script>
 
 <!-- Contact Section -->
-<section id="kontakt" class="py-32 bg-gradient-to-br from-slate-50 to-blue-50">
+<section id="kontakt" class="py-32">
 	<div class="container mx-auto px-6">
 		<div class="max-w-6xl mx-auto">
 			<div class="text-center mb-20">
@@ -92,11 +92,11 @@
 						</div>
 						
 						<div class="space-y-3">
-							<Button class="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-xl h-10 font-medium">
+							<Button href="/kontakt" class="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-xl h-10 font-medium">
 								<Waves class="mr-2 h-4 w-4" />
 								Broneeri proovisukeldumine
 							</Button>
-							<Button variant="outline" class="w-full border-2 border-white text-white hover:bg-white hover:text-gray-900 rounded-xl h-10 font-medium bg-transparent">
+							<Button href="/uritused" variant="outline" class="w-full border-2 border-white text-white hover:bg-white hover:text-gray-900 rounded-xl h-10 font-medium bg-transparent">
 								Vaata koolitusi
 							</Button>
 						</div>

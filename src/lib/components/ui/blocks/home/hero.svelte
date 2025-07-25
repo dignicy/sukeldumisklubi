@@ -41,11 +41,11 @@
                     </p>
                     
                     <div class="flex flex-col sm:flex-row gap-4 justify-start animate-fade-in-up" style="animation-delay: 0.3s">
-                        <Button size="lg" class="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-xl h-auto">
+                        <Button href="/proovisukeldumine" size="lg" class="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-xl h-auto">
                             Alusta sukeldumisega
                             <ArrowRight class="ml-2 h-5 w-5" />
                         </Button>
-                        <Button size="lg" variant="outline" class="border-white text-black hover:bg-white hover:text-black px-8 py-4 rounded-xl h-auto">
+                        <Button href="/uritused" size="lg" variant="outline" class="border-white text-black hover:bg-white hover:text-black px-8 py-4 rounded-xl h-auto">
                             Vaata koolitusi
                         </Button>
                     </div>

@@ -17,20 +17,20 @@
 				<div>
 					<h4 class="font-semibold mb-6 text-lg">Koolitused</h4>
 					<ul class="space-y-3 text-gray-400">
-						<li><a href="#" class="hover:text-white transition-colors">Proovisukeldumine</a></li>
-						<li><a href="#" class="hover:text-white transition-colors">Algaja kursused</a></li>
-						<li><a href="#" class="hover:text-white transition-colors">Edasijõudnu kursused</a></li>
-						<li><a href="#" class="hover:text-white transition-colors">Tehniline sukeldumine</a></li>
+						<li><a href="/proovisukeldumine" class="hover:text-white transition-colors">Proovisukeldumine</a></li>
+						<li><a href="/sukeldumiskursused-algajatele" class="hover:text-white transition-colors">Algaja kursused</a></li>
+						<li><a href="/sukeldumiskursused-edasijõudnutele" class="hover:text-white transition-colors">Edasijõudnu kursused</a></li>
+						<li><a href="/tehniline-sukeldumine" class="hover:text-white transition-colors">Tehniline sukeldumine</a></li>
 					</ul>
 				</div>
 				
 				<div>
 					<h4 class="font-semibold mb-6 text-lg">Teenused</h4>
 					<ul class="space-y-3 text-gray-400">
-						<li><a href="#" class="hover:text-white transition-colors">Varustuse rent</a></li>
-						<li><a href="#" class="hover:text-white transition-colors">Sukeldumisreisid</a></li>
-						<li><a href="#" class="hover:text-white transition-colors">Hooldus</a></li>
-						<li><a href="#" class="hover:text-white transition-colors">Konsultatsioon</a></li>
+						<li><a href="/sukeldumisvarustuse-rent" class="hover:text-white transition-colors">Varustuse rent</a></li>
+						<li><a href="/uritused" class="hover:text-white transition-colors">Sukeldumisreisid</a></li>
+						<li><a href="/sukeldumisvarustuse-hooldus" class="hover:text-white transition-colors">Hooldus</a></li>
+						<li><a href="/kontakt" class="hover:text-white transition-colors">Konsultatsioon</a></li>
 					</ul>
 				</div>
 			</div>
@@ -40,8 +40,8 @@
 			<div class="flex flex-col md:flex-row justify-between items-center text-gray-400">
 				<p>&copy; 2024 Sukeldumisklubi. Kõik õigused kaitstud.</p>
 				<div class="flex space-x-8 mt-4 md:mt-0">
-					<a href="#" class="hover:text-white transition-colors">Privaatsus</a>
-					<a href="#" class="hover:text-white transition-colors">Tingimused</a>
+					<!-- <a href="#" class="hover:text-white transition-colors">Privaatsus</a>
+					<a href="#" class="hover:text-white transition-colors">Tingimused</a> -->
 				</div>
 			</div>
 		</div>
