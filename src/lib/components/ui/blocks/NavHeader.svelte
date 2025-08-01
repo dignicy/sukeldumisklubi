@@ -233,7 +233,7 @@
 </script>
 
 <!-- Navigation Header -->
-<header class="fixed left-0 right-0 z-50 transition-all duration-500 ease-out {isScrolled ? 'top-4' : 'top-8'}">
+<header class="fixed left-0 right-0 z-50 transition-all duration-500 ease-out {isScrolled ? 'top-2 lg:top-4' : 'top-2 lg:top-8'}">
 	<!-- Match the exact hero section spacing: py-4 px-4 for outer, then container mx-auto px-6 lg:px-8 -->
 	<div class="mx-auto py-4 px-4">
 		<nav 
@@ -580,10 +580,10 @@
 					<a 
 						href="/kontakt"
 						onclick={closeMobileMenu}
-						class="inline-flex items-center space-x-2 px-4 py-2 bg-orange-600 text-white rounded-lg text-sm font-medium hover:bg-orange-700 transition-all duration-200"
+						class="flex items-center justify-center space-x-2 px-4 py-2 bg-orange-600 text-white rounded-lg text-sm font-medium hover:bg-orange-700 transition-all duration-200 w-full"
 					>
 						<Mail class="w-4 h-4" />
-						<span>Kontakt</span>
+						<span>Saada meile kiri</span>
 					</a>
 				</div>
 			</div>

@@ -135,8 +135,8 @@
 								class="h-96 w-full object-cover {service.id === 'koolitused' ? 'object-top' : ''} transition-transform duration-700 hover:scale-105"
 							/>
 						</div>
-						<div class="absolute {service.iconPosition === 'bottom-left' ? '-bottom-6 -left-6' : '-bottom-6 -right-6'} rounded-2xl bg-blue-400/50 backdrop-blur-lg p-4 text-white shadow-xl">
-							<svelte:component this={service.icon} class="h-8 w-8" />
+						<div class="absolute {service.iconPosition === 'bottom-left' ? '-bottom-3 -left-3 sm:-bottom-6 sm:-left-6' : '-bottom-3 -right-3 sm:-bottom-6 sm:-right-6'} rounded-2xl bg-blue-400/50 backdrop-blur-lg p-3 sm:p-4 text-white shadow-xl">
+							<svelte:component this={service.icon} class="h-6 w-6 sm:h-8 sm:w-8" />
 						</div>
 					</div>
 

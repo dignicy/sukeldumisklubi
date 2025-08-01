@@ -5,6 +5,7 @@
 	import { Calendar } from '$lib/components/ui/calendar';
 	import * as Popover from '$lib/components/ui/popover';
 	import * as Select from '$lib/components/ui/select';
+	import * as Drawer from '$lib/components/ui/drawer';
 	import {
 		Calendar as CalendarIcon,
 		MapPin,
@@ -15,12 +16,15 @@
 		Search,
 		X,
 		ChevronDown,
-		ArrowRight
+		ArrowRight,
+		Filter,
+		SlidersHorizontal
 	} from 'lucide-svelte';
 	import { CalendarDate, getLocalTimeZone, today } from '@internationalized/date';
 	import type { DateValue } from '@internationalized/date';
 	import type { DiveEvent, ViewMode, EventType } from '$lib/types/events';
 	import { EVENT_TYPE_COLORS } from '$lib/types/events';
+	import { MediaQuery } from 'svelte/reactivity';
 
 	interface Props {
 		events: DiveEvent[];
@@ -39,6 +43,12 @@
 	// Popover open states
 	let startDateOpen = $state(false);
 	let endDateOpen = $state(false);
+
+	// Mobile drawer state
+	let filtersDrawerOpen = $state(false);
+
+	// Responsive breakpoint detection (xl = 1280px)
+	const isDesktop = new MediaQuery('(min-width: 1280px)');
 
 	// Estonian month abbreviations
 	const estonianMonths = [
@@ -293,121 +303,265 @@
 		<!-- Filter and View Controls Bar -->
 		<div class="mx-auto mb-8 max-w-7xl">
 			<div class="rounded-xl border bg-white p-6 shadow-md">
-				<div class="flex flex-col items-center gap-4 xl:flex-row">
-					<!-- Search -->
-					<div class="relative min-w-[250px] flex-1">
-						<Search
-							class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transform text-gray-400"
-						/>
-						<Input bind:value={searchTerm} placeholder="Otsi üritusi..." class="pl-10" />
-					</div>
+				{#if isDesktop.current}
+					<!-- Desktop Layout - Keep Exactly As Is -->
+					<div class="flex flex-col items-center gap-4 xl:flex-row">
+						<!-- Search -->
+						<div class="relative min-w-[250px] flex-1">
+							<Search
+								class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transform text-gray-400"
+							/>
+							<Input bind:value={searchTerm} placeholder="Otsi üritusi..." class="pl-10" />
+						</div>
 
-					<!-- Event Type Filter - FIXED: Use proper bits-ui Select API -->
-					<div class="min-w-[140px]">
-						<Select.Root type="single" bind:value={selectedEventType}>
-							<Select.Trigger class="w-full">
-								{getEventTypeLabel(selectedEventType)}
-							</Select.Trigger>
-							<Select.Content>
-								<Select.Item value="all">Kõik tüübid</Select.Item>
-								<Select.Item value="Üritus">Üritus</Select.Item>
-								<Select.Item value="Koolitus">Koolitus</Select.Item>
-								<Select.Item value="Reis">Reis</Select.Item>
-							</Select.Content>
-						</Select.Root>
-					</div>
+						<!-- Event Type Filter -->
+						<div class="min-w-[140px]">
+							<Select.Root type="single" bind:value={selectedEventType}>
+								<Select.Trigger class="w-full">
+									{getEventTypeLabel(selectedEventType)}
+								</Select.Trigger>
+								<Select.Content>
+									<Select.Item value="all">Kõik tüübid</Select.Item>
+									<Select.Item value="Üritus">Üritus</Select.Item>
+									<Select.Item value="Koolitus">Koolitus</Select.Item>
+									<Select.Item value="Reis">Reis</Select.Item>
+								</Select.Content>
+							</Select.Root>
+						</div>
 
-					<!-- Location Filter - FIXED: Use proper bits-ui Select API -->
-					<div class="min-w-[160px]">
-						<Select.Root type="single" bind:value={selectedLocation}>
-							<Select.Trigger class="w-full">
-								{getLocationLabel(selectedLocation)}
-							</Select.Trigger>
-							<Select.Content>
-								<Select.Item value="all">Kõik asukohad</Select.Item>
-								{#each uniqueLocations as location}
-									<Select.Item value={location}>{location}</Select.Item>
-								{/each}
-							</Select.Content>
-						</Select.Root>
-					</div>
+						<!-- Location Filter -->
+						<div class="min-w-[160px]">
+							<Select.Root type="single" bind:value={selectedLocation}>
+								<Select.Trigger class="w-full">
+									{getLocationLabel(selectedLocation)}
+								</Select.Trigger>
+								<Select.Content>
+									<Select.Item value="all">Kõik asukohad</Select.Item>
+									{#each uniqueLocations as location}
+										<Select.Item value={location}>{location}</Select.Item>
+									{/each}
+								</Select.Content>
+							</Select.Root>
+						</div>
 
-					<!-- Date Range - FIXED: Add type="single" and auto-close -->
-					<div class="flex items-center gap-2">
-						<Popover.Root bind:open={startDateOpen}>
-							<Popover.Trigger>
-								<Button variant="outline" class="min-w-[120px] justify-start">
-									<CalendarIcon class="mr-2 h-4 w-4" />
-									{startDate ? formatDateForDisplay(startDate) : 'Algus'}
+						<!-- Date Range -->
+						<div class="flex items-center gap-2">
+							<Popover.Root bind:open={startDateOpen}>
+								<Popover.Trigger>
+									<Button variant="outline" class="min-w-[120px] justify-start">
+										<CalendarIcon class="mr-2 h-4 w-4" />
+										{startDate ? formatDateForDisplay(startDate) : 'Algus'}
+									</Button>
+								</Popover.Trigger>
+								<Popover.Content class="w-auto p-0">
+									<Calendar
+										type="single"
+										bind:value={startDate}
+										onValueChange={() => {
+											startDateOpen = false;
+										}}
+									/>
+								</Popover.Content>
+							</Popover.Root>
+
+							<span class="text-gray-400">–</span>
+
+							<Popover.Root bind:open={endDateOpen}>
+								<Popover.Trigger>
+									<Button variant="outline" class="min-w-[120px] justify-start">
+										<CalendarIcon class="mr-2 h-4 w-4" />
+										{endDate ? formatDateForDisplay(endDate) : 'Lõpp'}
+									</Button>
+								</Popover.Trigger>
+								<Popover.Content class="w-auto p-0">
+									<Calendar
+										type="single"
+										bind:value={endDate}
+										onValueChange={() => {
+											endDateOpen = false;
+										}}
+									/>
+								</Popover.Content>
+							</Popover.Root>
+						</div>
+
+						<!-- Clear Filters -->
+						{#if hasActiveFilters()}
+							<Button
+								variant="ghost"
+								onclick={clearFilters}
+								size="sm"
+								class="flex shrink-0 items-center gap-2"
+							>
+								<X class="h-4 w-4" />
+								Tühista
+							</Button>
+						{/if}
+
+						<!-- View Toggle -->
+						<div class="flex shrink-0 rounded-lg bg-gray-100 p-1">
+							<button
+								class="rounded-md p-2 transition-all {currentView === 'grid'
+									? 'bg-white text-orange-600 shadow-sm'
+									: 'text-gray-600 hover:bg-gray-200'}"
+								onclick={() => (currentView = 'grid')}
+								title="Ruudustik vaade"
+							>
+								<Grid3X3 class="h-4 w-4" />
+							</button>
+							<button
+								class="rounded-md p-2 transition-all {currentView === 'calendar'
+									? 'bg-white text-orange-600 shadow-sm'
+									: 'text-gray-600 hover:bg-gray-200'}"
+								onclick={() => (currentView = 'calendar')}
+								title="Kalender vaade"
+							>
+								<List class="h-4 w-4" />
+							</button>
+						</div>
+					</div>
+				{:else}
+					<!-- Mobile Layout - Compact with Drawer -->
+					<div class="flex items-center gap-3">
+						<!-- Search (always visible on mobile) -->
+						<div class="relative flex-1">
+							<Search
+								class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transform text-gray-400"
+							/>
+							<Input bind:value={searchTerm} placeholder="Otsi üritusi..." class="pl-10" />
+						</div>
+
+						<!-- Filters Button -->
+						<Drawer.Root bind:open={filtersDrawerOpen}>
+							<Drawer.Trigger>
+								<Button variant="outline" size="icon" class="relative shrink-0">
+									<SlidersHorizontal class="h-4 w-4" />
+									{#if hasActiveFilters()}
+										<div
+											class="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-orange-500"
+										></div>
+									{/if}
 								</Button>
-							</Popover.Trigger>
-							<Popover.Content class="w-auto p-0">
-								<Calendar
-									type="single"
-									bind:value={startDate}
-									onValueChange={() => {
-										startDateOpen = false;
-									}}
-								/>
-							</Popover.Content>
-						</Popover.Root>
+							</Drawer.Trigger>
+							<Drawer.Content>
+								<div class="mx-auto w-full max-w-sm">
+									<Drawer.Header>
+										<Drawer.Title>Filtrid</Drawer.Title>
+										<Drawer.Description>Kohenda otsingu parameetreid</Drawer.Description>
+									</Drawer.Header>
+									<div class="space-y-6 p-4">
+										<!-- Event Type Filter -->
+										<div class="space-y-2">
+											<label class="text-sm font-medium text-gray-700">Ürituse tüüp</label>
+											<Select.Root type="single" bind:value={selectedEventType}>
+												<Select.Trigger class="w-full">
+													{getEventTypeLabel(selectedEventType)}
+												</Select.Trigger>
+												<Select.Content>
+													<Select.Item value="all">Kõik tüübid</Select.Item>
+													<Select.Item value="Üritus">Üritus</Select.Item>
+													<Select.Item value="Koolitus">Koolitus</Select.Item>
+													<Select.Item value="Reis">Reis</Select.Item>
+												</Select.Content>
+											</Select.Root>
+										</div>
 
-						<span class="text-gray-400">–</span>
+										<!-- Location Filter -->
+										<div class="space-y-2">
+											<label class="text-sm font-medium text-gray-700">Asukoht</label>
+											<Select.Root type="single" bind:value={selectedLocation}>
+												<Select.Trigger class="w-full">
+													{getLocationLabel(selectedLocation)}
+												</Select.Trigger>
+												<Select.Content>
+													<Select.Item value="all">Kõik asukohad</Select.Item>
+													{#each uniqueLocations as location}
+														<Select.Item value={location}>{location}</Select.Item>
+													{/each}
+												</Select.Content>
+											</Select.Root>
+										</div>
 
-						<Popover.Root bind:open={endDateOpen}>
-							<Popover.Trigger>
-								<Button variant="outline" class="min-w-[120px] justify-start">
-									<CalendarIcon class="mr-2 h-4 w-4" />
-									{endDate ? formatDateForDisplay(endDate) : 'Lõpp'}
-								</Button>
-							</Popover.Trigger>
-							<Popover.Content class="w-auto p-0">
-								<Calendar
-									type="single"
-									bind:value={endDate}
-									onValueChange={() => {
-										endDateOpen = false;
-									}}
-								/>
-							</Popover.Content>
-						</Popover.Root>
+										<!-- Date Range -->
+										<div class="space-y-3">
+											<label class="text-sm font-medium text-gray-700">Kuupäevavahemik</label>
+											<div class="space-y-3">
+												<Popover.Root bind:open={startDateOpen}>
+													<Popover.Trigger class="w-full">
+														<Button variant="outline" class="w-full justify-start">
+															<CalendarIcon class="mr-2 h-4 w-4" />
+															{startDate ? formatDateForDisplay(startDate) : 'Alguskuupäev'}
+														</Button>
+													</Popover.Trigger>
+													<Popover.Content class="w-auto p-0">
+														<Calendar
+															type="single"
+															bind:value={startDate}
+															onValueChange={() => {
+																startDateOpen = false;
+															}}
+														/>
+													</Popover.Content>
+												</Popover.Root>
+
+												<Popover.Root bind:open={endDateOpen}>
+													<Popover.Trigger class="w-full">
+														<Button variant="outline" class="w-full justify-start">
+															<CalendarIcon class="mr-2 h-4 w-4" />
+															{endDate ? formatDateForDisplay(endDate) : 'Lõppkuupäev'}
+														</Button>
+													</Popover.Trigger>
+													<Popover.Content class="w-auto p-0">
+														<Calendar
+															type="single"
+															bind:value={endDate}
+															onValueChange={() => {
+																endDateOpen = false;
+															}}
+														/>
+													</Popover.Content>
+												</Popover.Root>
+											</div>
+										</div>
+									</div>
+									<Drawer.Footer>
+										{#if hasActiveFilters()}
+											<Button variant="outline" onclick={clearFilters} class="w-full">
+												<X class="mr-2 h-4 w-4" />
+												Tühista filtrid
+											</Button>
+										{/if}
+										<Drawer.Close>
+											<Button class="w-full">Rakenda filtrid</Button>
+										</Drawer.Close>
+									</Drawer.Footer>
+								</div>
+							</Drawer.Content>
+						</Drawer.Root>
+
+						<!-- View Toggle -->
+						<div class="flex shrink-0 rounded-lg bg-gray-100 p-1">
+							<button
+								class="rounded-md p-2 transition-all {currentView === 'grid'
+									? 'bg-white text-orange-600 shadow-sm'
+									: 'text-gray-600 hover:bg-gray-200'}"
+								onclick={() => (currentView = 'grid')}
+								title="Ruudustik vaade"
+							>
+								<Grid3X3 class="h-4 w-4" />
+							</button>
+							<button
+								class="rounded-md p-2 transition-all {currentView === 'calendar'
+									? 'bg-white text-orange-600 shadow-sm'
+									: 'text-gray-600 hover:bg-gray-200'}"
+								onclick={() => (currentView = 'calendar')}
+								title="Kalender vaade"
+							>
+								<List class="h-4 w-4" />
+							</button>
+						</div>
 					</div>
-
-					<!-- Clear Filters -->
-					{#if hasActiveFilters()}
-						<Button
-							variant="ghost"
-							onclick={clearFilters}
-							size="sm"
-							class="flex shrink-0 items-center gap-2"
-						>
-							<X class="h-4 w-4" />
-							Tühista
-						</Button>
-					{/if}
-
-					<!-- View Toggle -->
-					<div class="flex shrink-0 rounded-lg bg-gray-100 p-1">
-						<button
-							class="rounded-md p-2 transition-all {currentView === 'grid'
-								? 'bg-white text-orange-600 shadow-sm'
-								: 'text-gray-600 hover:bg-gray-200'}"
-							onclick={() => (currentView = 'grid')}
-							title="Ruudustik vaade"
-						>
-							<Grid3X3 class="h-4 w-4" />
-						</button>
-						<button
-							class="rounded-md p-2 transition-all {currentView === 'calendar'
-								? 'bg-white text-orange-600 shadow-sm'
-								: 'text-gray-600 hover:bg-gray-200'}"
-							onclick={() => (currentView = 'calendar')}
-							title="Kalender vaade"
-						>
-							<List class="h-4 w-4" />
-						</button>
-					</div>
-				</div>
+				{/if}
 			</div>
 
 			<!-- Debug Info - FIXED: Show proper primitive values

@@ -96,7 +96,7 @@
 		<div class="max-w-7xl mx-auto">
 			<!-- Header -->
 			<div class="text-center mb-20 mt-16">
-				<h2 class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+				<h2 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
 					Avasta maailma parimaid
 					<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-300">
 						sukeldumispaiku

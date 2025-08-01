@@ -5,9 +5,9 @@
 </script>
 
 <!-- Hero Section -->
-<section class="relative flex items-center justify-center overflow-hidden bg-white py-4 px-4 min-h-screen">
+<section class="relative flex items-center justify-center overflow-hidden bg-white py-2 px-2 md:py-4 md:px-4 min-h-[600px] md:min-h-screen">
     <!-- Card Container -->
-    <div class="relative w-full max-w-screen bg-black rounded-3xl overflow-hidden min-h-[calc(100vh-2rem)]">
+    <div class="relative w-full max-w-screen bg-black rounded-3xl overflow-hidden min-h-[580px] md:min-h-[calc(100vh-2rem)]">
         <!-- Background -->
         <div class="absolute inset-0 z-0">
             <img
@@ -23,15 +23,15 @@
         </div>
         
         <!-- Content -->
-        <div class="relative z-10 max-w-7xl mx-auto min-h-[calc(100vh-2rem)] flex items-center justify-start">
-            <div class="container mx-auto px-6 lg:px-8 w-full">
+        <div class="relative z-10 max-w-7xl mx-auto min-h-[580px] md:min-h-[calc(100vh-2rem)] flex items-center justify-start">
+            <div class="container mx-auto px-6 lg:px-8 w-full mt-28 mb-8 md:mt-0 md:mb-0">
                 <div class="max-w-xl">
                     <div class="inline-flex items-center border border-white text-white bg-transparent rounded-full text-sm font-medium mb-8 animate-fade-in-up px-4 py-2 w-fit">
                         <Star class="h-4 w-4 mr-2 text-white" />
                         25+ aastat kogemust sukeldumises
                     </div>
                     
-                    <h1 class="text-6xl md:text-8xl font-bold text-white mb-6 tracking-tight animate-fade-in-up text-left" style="animation-delay: 0.1s">
+                    <h1 class="text-5xl md:text-8xl font-bold text-white mb-6 tracking-tight animate-fade-in-up text-left" style="animation-delay: 0.1s">
                         Ära ole pinnapealne
                     </h1>
                     

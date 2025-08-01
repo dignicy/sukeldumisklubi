@@ -19,9 +19,9 @@
 </svelte:head>
 
 <!-- Hero Section -->
-<section class="relative flex items-center justify-center overflow-hidden bg-white py-4 px-4 h-[500px] md:h-[600px]">
+<section class="relative flex items-center justify-center overflow-hidden bg-white py-2 sm:py-4 px-2 sm:px-4 h-[300px] sm:h-[400px] md:h-[500px]">
 	<!-- Card Container -->
-	<div class="relative w-full max-w-screen bg-black rounded-3xl overflow-hidden h-full">
+	<div class="relative w-full max-w-screen bg-black rounded-2xl sm:rounded-3xl overflow-hidden h-full">
 		<!-- Background -->
 		<div class="absolute inset-0 z-0">
 			<img 
@@ -29,28 +29,21 @@
 				alt="Sukeldumisklubi üritused"
 				class="w-full h-full object-cover"
 				loading="eager"
-				decoding="async"
-				draggable="false"
 			/>
-			<!-- Black overlay -->
 			<div class="absolute inset-0 bg-black/50"></div>
 		</div>
 
 		<!-- Content Overlay -->
-		<div class="absolute bottom-0 left-0 right-0 p-8 z-10">
-			<div class="mx-auto max-w-7xl px-6">
+		<div class="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8 z-10">
+			<div class="max-w-7xl mx-auto px-2 sm:px-4 md:px-6">
 				<div class="max-w-4xl">
-					
-					
-					<h1 class="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
+					<h1 class="text-3xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-2 sm:mb-3 md:mb-4 tracking-tight leading-tight">
 						Sukeldumisüritused
 					</h1>
 					
-					<p class="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl leading-relaxed">
+					<p class="text-sm sm:text-base md:text-lg lg:text-xl text-blue-100 max-w-2xl lg:max-w-3xl leading-relaxed">
 						Avasta meie mitmekesiseid sukeldumisüritusi - alates algajate kursustest kuni põnevate safarideni. Leia enda jaoks sobiv väljakutse!
 					</p>
-					
-					
 				</div>
 			</div>
 		</div>

@@ -111,8 +111,8 @@
 </svelte:head>
 
 <!-- Hero Section -->
-<section class="relative flex items-center justify-center overflow-hidden bg-white py-4 px-4 h-[400px] md:h-[500px]">
-	<div class="relative w-full max-w-screen bg-black rounded-3xl overflow-hidden h-full">
+<section class="relative flex items-center justify-center overflow-hidden bg-white py-2 sm:py-4 px-2 sm:px-4 h-[300px] sm:h-[400px] md:h-[500px]">
+	<div class="relative w-full max-w-screen bg-black rounded-2xl sm:rounded-3xl overflow-hidden h-full">
 		<!-- Background -->
 		<div class="absolute inset-0 z-0">
 			<img 
@@ -125,14 +125,14 @@
 		</div>
 
 		<!-- Content Overlay -->
-		<div class="absolute bottom-0 left-0 right-0 p-8 z-10">
-			<div class="max-w-7xl mx-auto px-6">
+		<div class="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8 z-10">
+			<div class="max-w-7xl mx-auto px-2 sm:px-4 md:px-6">
 				<div class="max-w-4xl">
-					<h1 class="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">
+					<h1 class="text-3xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-2 sm:mb-3 md:mb-4 tracking-tight leading-tight">
 						{pageTitle}
 					</h1>
 					
-					<p class="text-xl text-blue-100 max-w-3xl">
+					<p class="text-sm sm:text-base md:text-lg lg:text-xl text-blue-100 max-w-2xl lg:max-w-3xl leading-relaxed">
 						{pageSubtitle}
 					</p>
 				</div>
@@ -142,37 +142,37 @@
 </section>
 
 <!-- Main Content -->
-<section class="py-20 bg-white">
-	<div class="max-w-7xl mx-auto px-6">
-		<div class="grid lg:grid-cols-3 gap-16">
+<section class="py-8 sm:py-12 lg:py-20 bg-white">
+	<div class="max-w-7xl mx-auto px-4 sm:px-6">
+		<div class="grid lg:grid-cols-3 gap-8 lg:gap-16">
 			<!-- Main Content -->
-			<div class="lg:col-span-2 space-y-16">
-				<p class="text-lg text-gray-700 leading-relaxed">
+			<div class="lg:col-span-2 space-y-8 sm:space-y-12 lg:space-y-16">
+				<p class="text-base sm:text-lg text-gray-700 leading-relaxed">
 					{introText}
 				</p>
 
 				<!-- Lakes Accordion -->
-				<div class="space-y-6">
-					<h2 class="text-3xl font-bold text-gray-900 mb-8">Sukeldumiskohad</h2>
+				<div class="space-y-4 sm:space-y-6">
+					<h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-8">Sukeldumiskohad</h2>
 					
-					<Accordion.Root type="multiple" class="w-full space-y-4">
+					<Accordion.Root type="multiple" class="w-full space-y-3 sm:space-y-4">
 						{#each lakes as lake}
 							<Accordion.Item value={lake.id} class="border border-slate-200 rounded-xl overflow-hidden">
-								<Accordion.Trigger class="flex w-full items-center justify-between bg-slate-50 px-6 py-4 text-left hover:bg-slate-100 transition-colors">
-									<div class="flex items-center space-x-4">
-										<div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
-											<Fish class="h-5 w-5 text-orange-600" />
+								<Accordion.Trigger class="flex w-full items-center justify-between bg-slate-50 px-4 sm:px-6 py-3 sm:py-4 text-left hover:bg-slate-100 transition-colors">
+									<div class="flex items-center space-x-3 sm:space-x-4 min-w-0 flex-1">
+										<div class="w-8 h-8 sm:w-10 sm:h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
+											<Fish class="h-4 w-4 sm:h-5 sm:w-5 text-orange-600" />
 										</div>
-										<div>
-											<h3 class="text-xl font-bold text-gray-900">{lake.name}</h3>
-											<div class="flex items-center space-x-4 mt-1">
+										<div class="min-w-0 flex-1">
+											<h3 class="text-lg sm:text-xl font-bold text-gray-900 truncate">{lake.name}</h3>
+											<div class="flex flex-col sm:flex-row sm:items-center sm:space-x-2 mt-1 space-y-1 sm:space-y-0">
 												{#if lake.depth}
-													<Badge variant="secondary" class="text-xs">
+													<Badge variant="secondary" class="text-xs w-fit">
 														Sügavus: {lake.depth}
 													</Badge>
 												{/if}
 												{#if lake.special}
-													<Badge variant="destructive" class="text-xs">
+													<Badge variant="destructive" class="text-xs w-fit">
 														Muinsuskaitsealune
 													</Badge>
 												{/if}
@@ -181,24 +181,24 @@
 									</div>
 								</Accordion.Trigger>
 								
-								<Accordion.Content class="px-6 pb-6 pt-2">
-									<div class="space-y-4">
+								<Accordion.Content class="px-4 sm:px-6 pb-4 sm:pb-6 pt-2">
+									<div class="space-y-3 sm:space-y-4">
 										<!-- Heritage Protection Warning -->
 										{#if lake.special}
-											<div class="bg-red-50 border border-red-200 rounded-lg p-4">
+											<div class="bg-red-50 border border-red-200 rounded-lg p-3 sm:p-4">
 												<div class="flex items-center space-x-2 mb-2">
-													<AlertTriangle class="h-5 w-5 text-red-600" />
-													<h4 class="font-semibold text-red-800">Oluline!</h4>
+													<AlertTriangle class="h-4 w-4 sm:h-5 sm:w-5 text-red-600 flex-shrink-0" />
+													<h4 class="font-semibold text-red-800 text-sm sm:text-base">Oluline!</h4>
 												</div>
-												<p class="text-red-700 text-sm">Muinsuskaitsealune objekt – sukeldumine erilubadega!</p>
+												<p class="text-red-700 text-xs sm:text-sm">Muinsuskaitsealune objekt – sukeldumine erilubadega!</p>
 											</div>
 										{/if}
 
 										<!-- Content -->
 										{#if lake.content}
-											<div class="text-gray-700 leading-relaxed space-y-4">
+											<div class="text-gray-700 leading-relaxed space-y-3 sm:space-y-4">
 												{#each lake.content.split('\n\n') as paragraph}
-													<p>{paragraph}</p>
+													<p class="text-sm sm:text-base">{paragraph}</p>
 												{/each}
 											</div>
 										{/if}
@@ -210,7 +210,7 @@
 				</div>
 
 				<!-- Important Notice -->
-				<div class="p-6 bg-blue-50 border border-blue-200 rounded-xl">
+				<div class="p-4 sm:p-6 bg-blue-50 border border-blue-200 rounded-xl">
 					<div class="flex items-start space-x-3">
 						<div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
 							<svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -218,8 +218,8 @@
 							</svg>
 						</div>
 						<div>
-							<h4 class="font-semibold text-blue-800 mb-2">Oluline teave</h4>
-							<p class="text-blue-700 leading-relaxed">
+							<h4 class="font-semibold text-blue-800 mb-2 text-sm sm:text-base">Oluline teave</h4>
+							<p class="text-blue-700 leading-relaxed text-sm sm:text-base">
 								Siseveekogudes sukeldumine nõuab erilist ettevaatlikkust - nähtavus võib olla kehv ja põhi mudane. Arvestage taimestiku ja veetemperatuuriga. Muinsuskaitsealustel objektidel sukeldumine ainult erilubade alusel. Järgige alati keskkonnakaitse nõudeid.
 							</p>
 						</div>
@@ -228,47 +228,47 @@
 			</div>
 
 			<!-- Sidebar -->
-			<div class="lg:sticky lg:top-28 space-y-6 h-fit">
+			<div class="lg:sticky lg:top-28 space-y-4 sm:space-y-6 h-fit">
 				<!-- Question Section -->
-				<div class="bg-gradient-to-br from-slate-50 to-orange-50 rounded-3xl p-6 border border-slate-200">
-					<h3 class="text-xl font-bold text-gray-900 mb-3">{sidebarConfig.questionSection.title}</h3>
-					<p class="text-gray-600 text-sm mb-5">{sidebarConfig.questionSection.description}</p>
+				<div class="bg-gradient-to-br from-slate-50 to-orange-50 rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-slate-200">
+					<h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">{sidebarConfig.questionSection.title}</h3>
+					<p class="text-gray-600 text-sm mb-4 sm:mb-5">{sidebarConfig.questionSection.description}</p>
 					
-					<h4 class="text-lg font-bold text-gray-900 mb-4">{sidebarConfig.contactSection.title}</h4>
+					<h4 class="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4">{sidebarConfig.contactSection.title}</h4>
 					
-					<div class="space-y-3 mb-6">
-						<div class="flex items-center text-gray-600">
-							<div class="w-6 h-6 bg-orange-100 rounded-lg flex items-center justify-center mr-3">
+					<div class="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
+						<div class="flex items-start text-gray-600">
+							<div class="w-6 h-6 bg-orange-100 rounded-lg flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
 								<MapPin class="h-3 w-3 text-orange-600" />
 							</div>
-							<span class="text-sm font-medium">{sidebarConfig.contactSection.address}</span>
+							<span class="text-sm font-medium leading-relaxed">{sidebarConfig.contactSection.address}</span>
 						</div>
 						
 						<div class="flex items-center text-gray-600">
-							<div class="w-6 h-6 bg-orange-100 rounded-lg flex items-center justify-center mr-3">
+							<div class="w-6 h-6 bg-orange-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
 								<Clock class="h-3 w-3 text-orange-600" />
 							</div>
 							<span class="text-sm font-medium">{sidebarConfig.contactSection.hours}</span>
 						</div>
 						
 						<div class="flex items-center text-gray-600">
-							<div class="w-6 h-6 bg-orange-100 rounded-lg flex items-center justify-center mr-3">
+							<div class="w-6 h-6 bg-orange-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
 								<Phone class="h-3 w-3 text-orange-600" />
 							</div>
 							<span class="text-sm font-medium">{sidebarConfig.contactSection.phone}</span>
 						</div>
 						
-						<div class="flex items-center text-gray-600">
-							<div class="w-6 h-6 bg-orange-100 rounded-lg flex items-center justify-center mr-3">
+						<div class="flex items-start text-gray-600">
+							<div class="w-6 h-6 bg-orange-100 rounded-lg flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
 								<Mail class="h-3 w-3 text-orange-600" />
 							</div>
-							<span class="text-sm font-medium">{sidebarConfig.contactSection.email}</span>
+							<span class="text-sm font-medium break-all">{sidebarConfig.contactSection.email}</span>
 						</div>
 					</div>
 
 					<!-- CTA Button -->
 					<Button 
-						class="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-xl h-12 text-sm font-medium"
+						class="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-xl h-10 sm:h-12 text-sm font-medium"
 						onclick={() => window.location.href = sidebarConfig.ctaButton.link}
 					>
 						{sidebarConfig.ctaButton.text}
@@ -277,21 +277,21 @@
 
 				<!-- Images Section -->
 				{#if sidebarConfig.images && sidebarConfig.images.length > 0}
-					<div class="space-y-4">
+					<div class="space-y-3 sm:space-y-4">
 						{#each sidebarConfig.images as image}
-							<div class="relative overflow-hidden rounded-2xl bg-gray-100">
+							<div class="relative overflow-hidden rounded-xl sm:rounded-2xl bg-gray-100">
 								<img 
 									src={image} 
 									alt="Sukeldumise pilt"
-									class="w-full h-48 object-cover"
+									class="w-full h-40 sm:h-48 object-cover"
 								/>
 								<!-- Bottom CTA -->
-								<div class="absolute bottom-4 left-4 right-4">
+								<div class="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4">
 									<Button 
-										class="w-full bg-white/20 backdrop-blur-md border border-white/30 text-white hover:bg-white/30 rounded-xl px-4 py-2 text-sm font-medium transition-all duration-300"
+										class="w-full bg-white/20 backdrop-blur-md border border-white/30 text-white hover:bg-white/30 rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-300"
 										onclick={() => window.location.href = sidebarConfig.imageCtaButton.link}
 									>
-										<Calendar class="h-4 w-4 mr-2" />
+										<Calendar class="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
 										{sidebarConfig.imageCtaButton.text}
 									</Button>
 								</div>
