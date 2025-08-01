@@ -19,8 +19,8 @@
 </svelte:head>
 
 <!-- Hero Section -->
+
 <section class="relative flex items-center justify-center overflow-hidden bg-white py-2 sm:py-4 px-2 sm:px-4 h-[300px] sm:h-[400px] md:h-[500px]">
-	<!-- Card Container -->
 	<div class="relative w-full max-w-screen bg-black rounded-2xl sm:rounded-3xl overflow-hidden h-full">
 		<!-- Background -->
 		<div class="absolute inset-0 z-0">

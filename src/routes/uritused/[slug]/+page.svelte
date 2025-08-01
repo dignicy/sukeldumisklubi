@@ -91,10 +91,9 @@
 	<meta name="description" content={stripHtml(event.description || event.excerpt)} />
 </svelte:head>
 
-<!-- Hero Section -->
-<section class="relative flex items-center justify-center overflow-hidden bg-white py-4 px-4 h-[500px] md:h-[600px]">
-	<!-- Card Container -->
-	<div class="relative w-full max-w-screen bg-black rounded-3xl overflow-hidden h-full">
+<!-- NEW HERO SECTION -->
+<section class="relative flex items-center justify-center overflow-hidden bg-white py-2 sm:py-4 px-2 sm:px-4 h-[370px] sm:h-[400px] md:h-[500px]">
+	<div class="relative w-full max-w-screen bg-black rounded-2xl sm:rounded-3xl overflow-hidden h-full">
 		<!-- Background -->
 		<div class="absolute inset-0 z-0">
 			<img 
@@ -106,48 +105,47 @@
 				draggable="false"
 				onerror={(e) => { (e.currentTarget as HTMLImageElement).src = '/photos/sukeldumisklubi-photo-credit-manomi-tennakoon-2016.webp'; }}
 			/>
-			<!-- Black overlay -->
 			<div class="absolute inset-0 bg-black/50"></div>
 		</div>
 
-		<!-- Event Info Overlay -->
-		<div class="absolute bottom-0 left-0 right-0 p-8 z-10">
-			<div class="max-w-7xl mx-auto px-6">
+		<!-- Content Overlay -->
+		<div class="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8 z-10">
+			<div class="max-w-7xl mx-auto px-2 sm:px-4 md:px-6">
 				<div class="max-w-4xl">
-					<div class="flex flex-wrap items-center gap-3 mb-6">
-						<Badge variant="secondary" class="px-4 py-2 text-sm font-medium {getEventTypeStyle(event.type).bg} {getEventTypeStyle(event.type).text}">
+					<div class="flex flex-wrap items-center gap-3 mb-4 sm:mb-6">
+						<Badge variant="secondary" class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium {getEventTypeStyle(event.type).bg} {getEventTypeStyle(event.type).text}">
 							{event.type}
 						</Badge>
 						{#if daysUntil >= 0 && daysUntil <= 7}
-							<Badge variant="destructive" class="px-4 py-2 text-sm font-medium">
+							<Badge variant="destructive" class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium">
 								{daysUntil === 0 ? 'Täna' : daysUntil === 1 ? 'Homme' : `${daysUntil} päeva pärast`}
 							</Badge>
 						{/if}
 						{#if event.price}
-							<Badge variant="outline" class="bg-white/90 text-gray-900 px-4 py-2 text-sm font-semibold border-white/30">
+							<Badge variant="outline" class="bg-white/90 text-gray-900 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold border-white/30">
 								<Euro class="h-3 w-3 mr-1" />
 								{event.price}
 							</Badge>
 						{/if}
 					</div>
 					
-					<h1 class="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
+					<h1 class="text-3xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 tracking-tight leading-tight">
 						{event.title}
 					</h1>
 					
-					<div class="flex flex-wrap items-center gap-4">
-						<Badge variant="outline" class="bg-black/30 border-white/30 text-white px-4 py-2">
-							<CalendarIcon class="h-4 w-4 mr-2" />
+					<div class="flex flex-wrap items-center gap-2 sm:gap-4">
+						<Badge variant="outline" class="bg-black/30 border-white/30 text-white px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm">
+							<CalendarIcon class="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
 							{formatDate(event.startDate)}
 						</Badge>
 						{#if event.startTime}
-							<Badge variant="outline" class="bg-black/30 border-white/30 text-white px-4 py-2">
-								<Clock class="h-4 w-4 mr-2" />
+							<Badge variant="outline" class="bg-black/30 border-white/30 text-white px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm">
+								<Clock class="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
 								{formatTime(event.startTime)}
 							</Badge>
 						{/if}
-						<Badge variant="outline" class="bg-black/30 border-white/30 text-white px-4 py-2">
-							<MapPin class="h-4 w-4 mr-2" />
+						<Badge variant="outline" class="bg-black/30 border-white/30 text-white px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm">
+							<MapPin class="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
 							{event.location}
 						</Badge>
 					</div>
@@ -157,8 +155,10 @@
 	</div>
 </section>
 
+
+
 <!-- Main Content -->
-<section class="py-20 bg-white">
+<section class="py-8 bg-white">
 	<div class="max-w-7xl mx-auto px-6">
 		<div class="grid lg:grid-cols-3 gap-16">
 			<!-- Main Content -->
