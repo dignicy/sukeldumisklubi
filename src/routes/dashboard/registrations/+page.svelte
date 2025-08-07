@@ -454,7 +454,7 @@
                                     <div class="flex items-center gap-1">
                                         <Input 
                                             disabled 
-                                            value="https://sukeldumiskeskus.ee/uritused/{(data.selectedEvent as any).pageSlug}"
+                                            value="https://sukeldumisklubi.ee/uritused/{(data.selectedEvent as any).pageSlug}"
                                             class="min-w-[500px] text-xs"
                                             readonly
                                         />
@@ -467,7 +467,7 @@
                                             <ExternalLink class="h-4 w-4" />
                                         </Button>
                                         <Button
-                                            onclick={() => copyToClipboard(`https://sukeldumiskeskus.ee/uritused/${(data.selectedEvent as any).pageSlug}`, 'event-url')}
+                                            onclick={() => copyToClipboard(`https://sukeldumisklubi.ee/uritused/${(data.selectedEvent as any).pageSlug}`, 'event-url')}
                                             variant="ghost"
                                             size="sm"
                                             title="Kopeeri link"

@@ -64,7 +64,7 @@ export const actions: Actions = {
 				<p><strong>Sõnum:</strong></p>
 				<p>${message.replace(/\n/g, '<br>')}</p>
 				<hr>
-				<p><small>Saadetud sukeldumiskeskuse kontaktivormist ${new Date().toLocaleString('et-EE')}</small></p>
+				<p><small>Saadetud sukeldumisklubi kontaktivormist ${new Date().toLocaleString('et-EE')}</small></p>
 			`;
 
 			const textContent = `
@@ -76,7 +76,7 @@ Telefon: ${phone || 'Ei ole märgitud'}
 Teema: ${subject}
 Sõnum: ${message}
 
-Saadetud sukeldumiskeskuse kontaktivormist ${new Date().toLocaleString('et-EE')}
+Saadetud sukeldumisklubi kontaktivormist ${new Date().toLocaleString('et-EE')}
 			`;
 
 			// Send email
@@ -94,13 +94,13 @@ Saadetud sukeldumiskeskuse kontaktivormist ${new Date().toLocaleString('et-EE')}
 				await transporter.sendMail({
 					from: env.SMTP_FROM || env.SMTP_USER,
 					to: email,
-					subject: 'Teie sõnum on vastu võetud - Sukeldumiskeskus',
+					subject: 'Teie sõnum on vastu võetud - Sukeldumisklubi',
 					html: `
 						<h2>Täname teid pöördumise eest!</h2>
 						<p>Tere ${name},</p>
 						<p>Oleme teie sõnumi kätte saanud ja võtame teiega ühendust esimesel võimalusel.</p>
 						<p><strong>Teie sõnumi teema:</strong> ${subject}</p>
-						<p>Parimate tervitustega,<br>Sukeldumiskeskuse meeskond</p>
+						<p>Parimate tervitustega,<br>Sukeldumisklubi meeskond</p>
 					`,
 					text: `
 Täname teid pöördumise eest!
@@ -112,7 +112,7 @@ Oleme teie sõnumi kätte saanud ja võtame teiega ühendust esimesel võimaluse
 Teie sõnumi teema: ${subject}
 
 Tervitades,
-Sukeldumiskeskuse meeskond
+Sukeldumisklubi meeskond
 					`
 				});
 			}
